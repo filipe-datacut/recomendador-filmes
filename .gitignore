@@ -1,0 +1,20 @@
+# Ambiente Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+.env
+
+# Dados (não versionar o dataset bruto)
+data/ml-latest-small/
+*.csv
+!data/.gitkeep
+
+# Banco local
+*.db
+*.sqlite3
+
+# IDE / SO
+.vscode/
+.idea/
+.DS_Store
