@@ -137,3 +137,23 @@ Dockerfile
 .dockerignore
 requirements.txt
 ```
+
+## Avaliação offline
+
+O recomendador foi avaliado com um protocolo de hold-out: 20% das avaliações de
+cada usuário (com 10+ avaliações) foram escondidas como conjunto de teste, o
+modelo treinado no restante, e mediu-se quantos itens relevantes (nota >= 4)
+escondidos aparecem nas top-10 recomendações.
+
+Resultados (603 usuários, via `python -m app.evaluate`):
+
+- **Precision@10:** 0.0181
+- **Recall@10:** 0.0106
+
+Os valores são modestos por construção. O suporte mínimo torna o modelo
+deliberadamente conservador — ele se recusa a recomendar itens com poucas
+avaliações, que é justamente a proteção que elimina o lixo de nicho do topo.
+Há, portanto, um tradeoff explícito entre confiabilidade e cobertura: muitos
+itens relevantes escondidos têm pouco suporte no conjunto de treino e nunca
+entram como candidatos, o que limita o recall. Reportar a métrica torna esse
+comportamento mensurável em vez de suposto.
