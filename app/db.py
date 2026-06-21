@@ -1,3 +1,4 @@
+import os
 import sqlite3
 from pathlib import Path
 
@@ -5,7 +6,8 @@ import pandas as pd
 
 from app.dataset import load_ratings, load_movies
 
-DB_PATH = Path(__file__).resolve().parent.parent / "data" / "app.db"
+_default = Path(__file__).resolve().parent.parent / "data" / "app.db"
+DB_PATH = Path(os.environ.get("RECOMMENDER_DB", _default))
 
 
 def get_conn():
